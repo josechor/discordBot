@@ -17,17 +17,23 @@ module.exports = (client) => {
       }
     }
     const clientId = "599678533413109780";
-    const guildId = "1031016736436260945";
+    const guildIds = [
+      "1031016736436260945", // XAVINETA
+      "253952516637720577", // CREW
+    ];
     const rest = new REST({ version: "9" }).setToken(process.env.DISCORD_TOKEN);
 
     try {
       console.log(
         `Started refreshing ${client.commands.size} application (/) commands.`
       );
-      const data = await rest.put(
-        Routes.applicationGuildCommands(clientId, guildId),
-        { body: client.commandArray }
-      );
+
+      for (const guildId of guildIds) {
+        await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+          body: client.commandArray,
+        });
+        console.log(`✔️ Comandos registrados para el servidor ${guildId}`);
+      }
     } catch (error) {
       console.error(error);
     }
