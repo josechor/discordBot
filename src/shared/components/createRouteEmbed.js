@@ -1,9 +1,10 @@
 import { EmbedBuilder } from "discord.js";
 
 const dificultadColores = {
-  Fácil: 0x00ff00,
+  Facil: 0x00ff00,
   Media: 0xffff00,
-  Difícil: 0xff0000,
+  Dificil: 0xff0000,
+  Mortal: 0x8b0000,
 };
 
 export function createRouteEmbed(route) {
