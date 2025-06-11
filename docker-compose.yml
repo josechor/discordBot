@@ -1,0 +1,10 @@
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: meliodas
+    volumes:
+      - .:/app # Monta el código local en el contenedor
+    restart: always
+    command: ["npm", "run", "test"] # Ejecuta el script de nodemon
