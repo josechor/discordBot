@@ -12,6 +12,8 @@
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
-    "meliodas": "file:"
+    "meliodas": "file:",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
   }
 }

@@ -1,4 +1,11 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ActionRowBuilder,
+} = require("discord.js");
+const Route = require("../../models/route.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -45,6 +52,14 @@ module.exports = {
     const altitud = interaction.options.getNumber("desnivel");
     const dificultad = interaction.options.getString("dificultad");
 
+    const route = await Route.create({
+      nombre,
+      link,
+      km,
+      altitud,
+      dificultad,
+    });
+
     const dificultadColores = {
       Facil: 0x2ecc71,
       Media: 0xf1c40f,
@@ -63,6 +78,12 @@ module.exports = {
       .setColor(dificultadColores[dificultad])
       .setTimestamp();
 
-    await interaction.reply({ embeds: [embed] });
+    const likeButton = new ButtonBuilder()
+      .setCustomId(`likeRoute_${route.id}`)
+      .setLabel("⭐ Like")
+      .setStyle(ButtonStyle.Primary);
+
+    const row = new ActionRowBuilder().addComponents(likeButton);
+    await interaction.reply({ embeds: [embed], components: [row] });
   },
 };

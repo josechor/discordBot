@@ -19,7 +19,7 @@ module.exports = {
     } else if (interaction.isButton()) {
       const { buttons } = client;
       const { customId } = interaction;
-      const button = buttons.get(customId);
+      const button = buttons.get(customId.split("_")[0]);
       if (!button) return new Error("No hay ningún código para este botón");
       try {
         await button.execute(interaction, client);
