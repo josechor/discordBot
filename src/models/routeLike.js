@@ -20,6 +20,7 @@ const RouteLike = sequelize.define(
         fields: ["userId", "routeId"],
       },
     ],
+    freezeTableName: true,
   }
 );
 

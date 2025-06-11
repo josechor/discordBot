@@ -53,11 +53,13 @@ module.exports = {
     const dificultad = interaction.options.getString("dificultad");
 
     const route = await Route.create({
+      userId: interaction.user.id,
       nombre,
       link,
       km,
       altitud,
       dificultad,
+      serverId: interaction.guild.id,
     });
 
     const embed = createRouteEmbed(route);

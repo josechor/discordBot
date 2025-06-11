@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node ."
   },
+  "sequelize": {
+    "config": "config/config.cjs"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -15,5 +18,8 @@
     "meliodas": "file:",
     "sequelize": "^6.37.7",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.3"
   }
 }
