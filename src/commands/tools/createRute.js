@@ -1,11 +1,11 @@
-const {
-  SlashCommandBuilder,
-  EmbedBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  ActionRowBuilder,
-} = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 const Route = require("../../models/route.js");
+const {
+  createRouteEmbed,
+} = require("../../shared/components/createRouteEmbed.js");
+const {
+  routeLikeButton,
+} = require("../../shared/components/RouteLikeButton.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -60,30 +60,9 @@ module.exports = {
       dificultad,
     });
 
-    const dificultadColores = {
-      Facil: 0x2ecc71,
-      Media: 0xf1c40f,
-      Dificil: 0xe74c3c,
-      Mortal: 0x000000,
-    };
+    const embed = createRouteEmbed(route);
 
-    const embed = new EmbedBuilder()
-      .setTitle(`🌄 ${nombre.toUpperCase()}`)
-      .setDescription(
-        `📍 [Ver ruta](${link})\n\n` +
-          `🏔️ **Dificultad:** ${dificultad}\n` +
-          `📏 **Distancia:** ${km ? `${km} km` : "No especificada"}\n` +
-          `📈 **Desnivel:** ${altitud ? `${altitud} m` : "No especificada"}`
-      )
-      .setColor(dificultadColores[dificultad])
-      .setTimestamp();
-
-    const likeButton = new ButtonBuilder()
-      .setCustomId(`likeRoute_${route.id}`)
-      .setLabel("⭐ Like")
-      .setStyle(ButtonStyle.Primary);
-
-    const row = new ActionRowBuilder().addComponents(likeButton);
-    await interaction.reply({ embeds: [embed], components: [row] });
+    const likeButton = routeLikeButton(route.id, route.likes);
+    await interaction.reply({ embeds: [embed], components: [likeButton] });
   },
 };
