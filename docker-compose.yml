@@ -7,4 +7,5 @@ services:
     volumes:
       - .:/app # Monta el código local en el contenedor
       - ./data:/app/data
+    restart: always
     command: ["npm", "run", "test"] # Ejecuta el script de nodemon
