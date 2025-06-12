@@ -1,6 +1,7 @@
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
+const { DISCORD_GUILD_ID } = process.env;
 
 module.exports = (client) => {
   client.handleCommands = async () => {
@@ -16,10 +17,9 @@ module.exports = (client) => {
         commandArray.push(command.data.toJSON());
       }
     }
-    const clientId = "599678533413109780";
+    const clientId = DISCORD_GUILD_ID;
     const guildIds = [
       "1031016736436260945", // XAVINETA
-      "253952516637720577", // CREW
     ];
     const rest = new REST({ version: "9" }).setToken(process.env.DISCORD_TOKEN);
 
